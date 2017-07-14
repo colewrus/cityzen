@@ -1,0 +1,158 @@
+fileFormatVersion: 2
+guid: d931a54d5aa12f14ab1412eff8ae4131
+timeCreated: 1499995195
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Camera
+    100002: chair
+    100004: door
+    100006: Lamp
+    100008: opensign
+    100010: parking spot
+    100012: purple
+    100014: Roof
+    100016: Sign
+    100018: Sign2
+    100020: signs
+    100022: table
+    100024: //RootNode
+    100026: wall
+    100028: wall.001
+    100030: wall.002
+    100032: whiteawn
+    100034: Window
+    400000: Camera
+    400002: chair
+    400004: door
+    400006: Lamp
+    400008: opensign
+    400010: parking spot
+    400012: purple
+    400014: Roof
+    400016: Sign
+    400018: Sign2
+    400020: signs
+    400022: table
+    400024: //RootNode
+    400026: wall
+    400028: wall.001
+    400030: wall.002
+    400032: whiteawn
+    400034: Window
+    2300000: chair
+    2300002: door
+    2300004: opensign
+    2300006: parking spot
+    2300008: purple
+    2300010: Roof
+    2300012: Sign
+    2300014: Sign2
+    2300016: signs
+    2300018: table
+    2300020: wall
+    2300022: wall.001
+    2300024: wall.002
+    2300026: whiteawn
+    2300028: Window
+    3300000: chair
+    3300002: door
+    3300004: opensign
+    3300006: parking spot
+    3300008: purple
+    3300010: Roof
+    3300012: Sign
+    3300014: Sign2
+    3300016: signs
+    3300018: table
+    3300020: wall
+    3300022: wall.001
+    3300024: wall.002
+    3300026: whiteawn
+    3300028: Window
+    4300000: whiteawn
+    4300002: purple
+    4300004: wall.001
+    4300006: table
+    4300008: chair
+    4300010: wall.002
+    4300012: opensign
+    4300014: door
+    4300016: parking spot
+    4300018: signs
+    4300020: wall
+    4300022: Window
+    4300024: Sign2
+    4300026: Sign
+    4300028: Roof
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
