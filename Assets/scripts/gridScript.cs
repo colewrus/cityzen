@@ -16,7 +16,12 @@ public class gridScript : MonoBehaviour {
 
     public List<GameObject> spawnObj = new List<GameObject>();
 
+    public GameObject buildMenu;
+
 	private GameObject tempObj;
+
+    private int rotationPos; //where are we in our list of rotations
+    public List<Vector3> rotations = new List<Vector3>(); //list of premade rotatoes for the game objects
 
     void Awake()
     {
@@ -24,7 +29,7 @@ public class gridScript : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-
+        buildMenu.SetActive(false);
   
     }
 
@@ -44,29 +49,90 @@ public class gridScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //Debug.Log(Input.mousePosition.x + ", " + Screen.width);
-        if(Input.mousePosition.x >= Screen.width - 50)
-        {           
-            Camera.main.transform.position += new Vector3(cameraSpeed, 0, 0) * Time.deltaTime;
-        }
-        if(Input.mousePosition.x <= 0 + 50)
-        {
-            Camera.main.transform.position -= new Vector3(cameraSpeed, 0, 0) * Time.deltaTime;
-        }
+        cameraControl();
 
-		if (Input.GetKeyDown(KeyCode.Alpha1)) {
-			tempObj = (GameObject)Instantiate (spawnObj [1], currentTileVector, Quaternion.identity);
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha2)) {
-			tempObj = (GameObject)Instantiate (spawnObj [0], currentTileVector, Quaternion.identity);
-		}
+
 
 		if (Input.GetMouseButtonDown (0)) {
 			tempObj = null;
 		}
 
+        if (Input.GetMouseButtonDown(1)) //right click
+        {
+            if(tempObj != null)
+            {
+                Destroy(tempObj);
+                tempObj = null; //get rid of temp object 
+            }else
+            {
+                buildMenu.GetComponent<Animator>().Play("buildMenu_open"); //open up the menu
+                
+                if (buildMenu.activeSelf)
+                {
+                    buildMenu.GetComponent<Animator>().Play("close_buildMenu"); //if menu is already open then close it
+                }
+                else
+                {
+                    buildMenu.SetActive(true); 
+                }                
+            }
+        }
+
+        if(tempObj != null && Input.GetKeyDown(KeyCode.R))
+        {
+            if (rotationPos < rotations.Count - 1)
+            {
+                rotationPos++;
+            }
+            else
+            {
+                rotationPos = 0;
+            }
+
+            Vector3 changeRot = rotations[rotationPos];
+            tempObj.transform.rotation = Quaternion.Euler(changeRot);
+        }
+
+        //update the temporary object, snaps to the grid tile that you hover over
 		if (tempObj != null) {
 			tempObj.transform.position = currentTileVector;
 		}
 	}
+
+
+
+    void cameraControl()
+    {
+        if (Input.mousePosition.x >= Screen.width - 50)
+        {
+            Camera.main.transform.position += new Vector3(cameraSpeed, 0, 0) * Time.deltaTime;
+        }
+        if (Input.mousePosition.x <= 0 + 50)
+        {
+            Camera.main.transform.position -= new Vector3(cameraSpeed, 0, 0) * Time.deltaTime;
+        }
+        if (Input.mousePosition.y >= Screen.height - 50)
+        {
+            Camera.main.transform.position += new Vector3(0, 0, cameraSpeed) * Time.deltaTime;
+        }
+
+        if (Input.mousePosition.y <= 0 + 50)
+        {
+            Camera.main.transform.position -= new Vector3(0, 0, cameraSpeed) * Time.deltaTime;
+        }
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            Camera.main.transform.position += new Vector3(0, cameraSpeed*2, 0) * Time.deltaTime;
+        }
+        if(Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            Camera.main.transform.position -= new Vector3(0, cameraSpeed*2, 0) * Time.deltaTime;
+        }
+    }
+
+    public void objSelect(int num)
+    {
+        tempObj = (GameObject)Instantiate(spawnObj[num], currentTileVector, Quaternion.identity);
+        buildMenu.GetComponent<Animator>().Play("close_buildMenu");
+    }
 }
