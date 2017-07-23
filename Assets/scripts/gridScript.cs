@@ -136,3 +136,4 @@ public class gridScript : MonoBehaviour {
         buildMenu.GetComponent<Animator>().Play("close_buildMenu");
     }
 }
+//test commenter here. 
