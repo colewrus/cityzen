@@ -17,8 +17,9 @@ public class gridScript : MonoBehaviour {
     public List<GameObject> spawnObj = new List<GameObject>();
 
     public GameObject buildMenu;
-
-	private GameObject tempObj;
+    
+	public GameObject tempObj;
+ 
 
     private int rotationPos; //where are we in our list of rotations
     public List<Vector3> rotations = new List<Vector3>(); //list of premade rotatoes for the game objects
@@ -41,7 +42,11 @@ public class gridScript : MonoBehaviour {
         {
             for(int j = 0; j < gridSize; j++)
             {
-                Instantiate(gridTile, new Vector3(i * gridSpacing, 0, j* gridSpacing), Quaternion.identity);
+
+               GameObject tempInst = (GameObject) Instantiate(gridTile, new Vector3(i * gridSpacing, 0, j* gridSpacing), Quaternion.identity);
+                MeshCollider b = tempInst.GetComponent<MeshCollider>();
+                tempInst.transform.position = new Vector3(i * b.bounds.size.x, 0, j * b.bounds.size.z);
+                Debug.Log(b.bounds.size);
             }           
         }
 	}
