@@ -54,6 +54,7 @@ public class gridScript : MonoBehaviour {
 
 
 		if (Input.GetMouseButtonDown (0)) {
+            Debug.Log(currentTileVector);
 			tempObj = null;
 		}
 

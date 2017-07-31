@@ -17,8 +17,9 @@ public class tileMouseScript : MonoBehaviour {
 
     private void OnMouseEnter()
     {
-        
-        gridScript.instance.currentTileVector = this.gameObject.transform.position;
+
+        gridScript.instance.currentTileVector = this.gameObject.transform.position - (this.transform.localScale / 2);
+        Debug.Log(this.transform.localScale);
     }
 
     
