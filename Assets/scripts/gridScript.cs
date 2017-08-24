@@ -54,7 +54,7 @@ public class gridScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        cameraControl();
+        //cameraControl();
 
 
 
