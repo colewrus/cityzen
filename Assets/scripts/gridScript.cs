@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class objPrefabs
+{
+    public GameObject objectPrefab;
+    public int size;
+}
 
 public class gridScript : MonoBehaviour {
 
@@ -14,12 +20,12 @@ public class gridScript : MonoBehaviour {
     public float cameraSpeed;
     public Vector3 currentTileVector;
 
-    public List<GameObject> spawnObj = new List<GameObject>();
-
+    //public List<GameObject> spawnObj = new List<GameObject>();
+    public List<objPrefabs> spawnObj = new List<objPrefabs>();
     public GameObject buildMenu;
     
 	public GameObject tempObj;
- 
+    public objPrefabs tmpPrefab;
 
     private int rotationPos; //where are we in our list of rotations
     public List<Vector3> rotations = new List<Vector3>(); //list of premade rotatoes for the game objects
@@ -37,13 +43,14 @@ public class gridScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
 		tempObj = null;
+        tmpPrefab = null;
 
+        //make the grid
 		for(int i = 0; i < gridSize; i++)
         {
             for(int j = 0; j < gridSize; j++)
             {
-
-               GameObject tempInst = (GameObject) Instantiate(gridTile, new Vector3(i * gridSpacing, 0, j* gridSpacing), Quaternion.identity);
+                GameObject tempInst = (GameObject) Instantiate(gridTile, new Vector3(i * gridSpacing, 0, j* gridSpacing), Quaternion.identity);
                 MeshCollider b = tempInst.GetComponent<MeshCollider>();
                 tempInst.transform.position = new Vector3(i * b.bounds.size.x, 0, j * b.bounds.size.z);
                 Debug.Log(b.bounds.size);
@@ -138,7 +145,8 @@ public class gridScript : MonoBehaviour {
 
     public void objSelect(int num)
     {
-        tempObj = (GameObject)Instantiate(spawnObj[num], currentTileVector, Quaternion.identity);
+        tmpPrefab = spawnObj[num];
+        tempObj = (GameObject)Instantiate(spawnObj[num].objectPrefab, currentTileVector, Quaternion.identity);
         buildMenu.GetComponent<Animator>().Play("close_buildMenu");
     }
 }

@@ -20,18 +20,25 @@ public class tileMouseScript : MonoBehaviour {
         MeshCollider b = gameObject.GetComponent<MeshCollider>();
         if(gridScript.instance.tempObj != null)
         {
-            //if the temp object has a size > 1 do this below
-            if (gridScript.instance.tempObj.transform.eulerAngles.y == 0)
+            if(gridScript.instance.tmpPrefab.size > 1)
+            {
+                if (gridScript.instance.tempObj.transform.eulerAngles.y == 0)
+                {
+                    gridScript.instance.currentTileVector = b.bounds.center + new Vector3(-b.bounds.size.x / 2, 0, b.bounds.size.z / 2);
+                }
+                if (gridScript.instance.tempObj.transform.eulerAngles.y == 180)
+                {
+                    gridScript.instance.currentTileVector = b.bounds.center + new Vector3(b.bounds.size.x / 2, 0, -b.bounds.size.z / 2);
+                }
+            }else if(gridScript.instance.tmpPrefab.size == 1)
             {
                 gridScript.instance.currentTileVector = b.bounds.center + new Vector3(-b.bounds.size.x / 2, 0, b.bounds.size.z / 2);
             }
-            if (gridScript.instance.tempObj.transform.eulerAngles.y == 180)
-            {
-                gridScript.instance.currentTileVector = b.bounds.center + new Vector3(b.bounds.size.x / 2, 0, -b.bounds.size.z / 2);
-            }
+       
+
            
         }
-        //gridScript.instance.currentTileVector = b.bounds.center + new Vector3(-b.bounds.size.x / 2, 0, b.bounds.size.z / 2);      
+              
         
 
         //this.gameObject.GetComponent<MeshCollider>().bounds;
