@@ -17,7 +17,9 @@ public class tileMouseScript : MonoBehaviour {
 
     private void OnMouseEnter()
     {
+        
         MeshCollider b = gameObject.GetComponent<MeshCollider>();
+        gridScript.instance.currentTile = b;
         if(gridScript.instance.tempObj != null)
         {
             if(gridScript.instance.tmpPrefab.size > 1)
@@ -32,19 +34,12 @@ public class tileMouseScript : MonoBehaviour {
                 }
             }else if(gridScript.instance.tmpPrefab.size == 1)
             {
-                gridScript.instance.currentTileVector = b.bounds.center + new Vector3(-b.bounds.size.x / 2, 0, b.bounds.size.z / 2);
-            }
-       
-
-           
-        }
-              
-        
-
-        //this.gameObject.GetComponent<MeshCollider>().bounds;
-        Debug.Log(b.bounds.center  + new Vector3(-b.bounds.size.x/2, 0, -b.bounds.size.z/2));
-        
+                Debug.Log(gridScript.instance.tempObj.name);
+                gridScript.instance.currentTileVector = b.bounds.center;
+            }          
+        }        
     }
 
+    
     
 }

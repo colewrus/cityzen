@@ -46,9 +46,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\newversionprefabs\SensorScript\CivicSupportScript.cs" />
+     <Compile Include="Assets\newversionprefabs\SensorScript\CommunityScript.cs" />
+     <Compile Include="Assets\newversionprefabs\SensorScript\EconOppSensor.cs" />
+     <Compile Include="Assets\newversionprefabs\SensorScript\SpecialtyScript.cs" />
+     <Compile Include="Assets\newversionprefabs\SensorScript\SpecialtyToParent.cs" />
+     <Compile Include="Assets\newversionprefabs\SensorScript\TriggerScript.cs" />
      <Compile Include="Assets\scripts\gridScript.cs" />
      <Compile Include="Assets\scripts\tileMouseScript.cs" />
      <Compile Include="Assets\scripts\uiEvents.cs" />
+     <None Include="Assets\LICENSE.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

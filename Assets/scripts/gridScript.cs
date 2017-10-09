@@ -30,14 +30,14 @@ public class gridScript : MonoBehaviour {
     private int rotationPos; //where are we in our list of rotations
     public List<Vector3> rotations = new List<Vector3>(); //list of premade rotatoes for the game objects
 
+    public MeshCollider currentTile; //what tile are we currently hovering over, this fixes rotation issues and can be used to grab data about what is there (once we change the type....)
     void Awake()
     {
         if (instance == null)
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-        buildMenu.SetActive(false);
-  
+        buildMenu.SetActive(false); 
     }
 
     // Use this for initialization
@@ -51,6 +51,7 @@ public class gridScript : MonoBehaviour {
             for(int j = 0; j < gridSize; j++)
             {
                 GameObject tempInst = (GameObject) Instantiate(gridTile, new Vector3(i * gridSpacing, 0, j* gridSpacing), Quaternion.identity);
+                tempInst.name = "t" + i + ":" + j;
                 MeshCollider b = tempInst.GetComponent<MeshCollider>();
                 tempInst.transform.position = new Vector3(i * b.bounds.size.x, 0, j * b.bounds.size.z);
                 Debug.Log(b.bounds.size);
@@ -104,6 +105,24 @@ public class gridScript : MonoBehaviour {
 
             Vector3 changeRot = rotations[rotationPos];
             tempObj.transform.rotation = Quaternion.Euler(changeRot);
+            /*
+            if (tmpPrefab.size > 1)
+            {
+                if (tempObj.transform.eulerAngles.y == 0)
+                {
+                    currentTileVector = currentTile.bounds.center + new Vector3(-currentTile.bounds.size.x / 2, 0, currentTile.bounds.size.z / 2);
+                }else if(tempObj.transform.eulerAngles.y == 90)
+                {
+                    currentTileVector = currentTile.bounds.center + new Vector3(-currentTile.bounds.size.x/2, 0, currentTile.bounds.size.z);
+                }
+                else if (tempObj.transform.eulerAngles.y == 180)
+                {
+                    currentTileVector = currentTile.bounds.center + new Vector3(currentTile.bounds.size.x / 2, 0, -currentTile.bounds.size.z / 2);
+                }
+            }else if(tmpPrefab.size == 1)
+            {
+                currentTileVector = currentTile.bounds.center;
+            }       */     
         }
 
         //update the temporary object, snaps to the grid tile that you hover over
