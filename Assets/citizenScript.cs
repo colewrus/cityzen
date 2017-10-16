@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class citizenScript : MonoBehaviour {
 
@@ -12,6 +13,10 @@ public class citizenScript : MonoBehaviour {
     public Material defaultMat;
 
     public GameObject textWindow;
+
+
+   
+   
 
     //Hunger function variables
     float hunger;
@@ -28,17 +33,24 @@ public class citizenScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         citizen = true;
-        Hunger();
-	}
+        
+        vendorProx = false;
+        hunger = 40;
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        agent.destination = new Vector3(7, 5.55f, 0);
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
+        Hunger();
+        
 		
 	}
 
     private void OnMouseOver()
     {
-        Debug.Log(gameObject.name);
+        
         gameObject.GetComponent<Renderer>().material = highlight;
 
         if (Input.GetMouseButtonUp(0))
@@ -64,18 +76,27 @@ public class citizenScript : MonoBehaviour {
     //Hunger  check script
     public void Hunger()
     {
-        if(hunger <= 40)
+        hunger -= 0.1f * Time.deltaTime;
+        if (hunger <= 40)
         {
+            Debug.Log(hunger);
             if(currentBldg != null)
             {
                 if (currentBldg.GetComponent<BuildingScript>().food_Vend)
                 {
                     if(currentBldg.GetComponent<BuildingScript>().vendor != null)
                     {
+                        NavMeshAgent agent = GetComponent<NavMeshAgent>();
                         navTarget = currentBldg.GetComponent<BuildingScript>().vendor.transform.position;
+                        agent.destination = navTarget;
                         if (vendorProx)
                             Debug.Log("vendorProx");
-                                //buy
+                        //buy
+                    }
+                    else
+                    {
+                        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+                        agent.destination = this.transform.position;
                     }
                 }
             }
@@ -93,7 +114,15 @@ public class citizenScript : MonoBehaviour {
             vendorProx = true;
         }
     }
-   // on trigger enter
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "vendor")
+        {
+            vendorProx = false;
+        }
+    }
+    // on trigger enter
 }
 
 

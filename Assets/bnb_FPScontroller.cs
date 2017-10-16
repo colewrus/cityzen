@@ -26,8 +26,7 @@ public class bnb_FPScontroller : MonoBehaviour {
         if (instance == null)
             instance = this;
         else if (instance != this)
-            Destroy(gameObject);
-    
+            Destroy(gameObject);    
     }
 
     // Use this for initialization
@@ -110,5 +109,19 @@ public class bnb_FPScontroller : MonoBehaviour {
     void Data()
     {
         Debug.Log(CharacterRot);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "vendor")
+        {
+            BuildingScript.instance.vendor = this.gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "vendor")
+            BuildingScript.instance.vendor = null;
     }
 }
