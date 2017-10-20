@@ -22,9 +22,11 @@ public class citizenScript : MonoBehaviour {
     float hunger;
     public GameObject currentBldg; //what building are you currently inside?
     Vector3 navTarget; //navMesh target - vector3?
-    bool vendorProx; //close enough to a vendor to interact?
+    bool getDining; //do you need to grab a dining location?
+    bool dineCollide; //did you hit the trigger for the dining box - prevents the capsule collider from having double contact with trigger
     bool leaveBool; //trigger to start the leave process. Might be obsolete
     GameObject foodObj; //used for consuming food, obj holds values 
+    
 
 
 
@@ -33,12 +35,12 @@ public class citizenScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         citizen = true;
-        
-        vendorProx = false;
+        navTarget = this.transform.position;
+        Debug.Log(navTarget);
+        getDining = false;
         hunger = 40;
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.destination = new Vector3(7, 5.55f, 0);
 
+        dineCollide = false;
     }
 	
 	// Update is called once per frame
@@ -79,24 +81,30 @@ public class citizenScript : MonoBehaviour {
         hunger -= 0.1f * Time.deltaTime;
         if (hunger <= 40)
         {
-            Debug.Log(hunger);
+            
             if(currentBldg != null)
             {
                 if (currentBldg.GetComponent<BuildingScript>().food_Vend)
                 {
-                    if(currentBldg.GetComponent<BuildingScript>().vendor != null)
+                    if (currentBldg.GetComponent<BuildingScript>().diningLocations.Count > 0)
                     {
+                        if(!getDining)
+                        {
+                            navTarget = currentBldg.GetComponent<BuildingScript>().diningLocations[0];
+                            currentBldg.GetComponent<BuildingScript>().diningLocations.Remove(navTarget);
+                            getDining = true;
+                        }
                         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-                        navTarget = currentBldg.GetComponent<BuildingScript>().vendor.transform.position;
+                        
+                        
                         agent.destination = navTarget;
-                        if (vendorProx)
-                            Debug.Log("vendorProx");
-                        //buy
                     }
                     else
                     {
+                        getDining = false;
+                        navTarget = this.transform.position;
                         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-                        agent.destination = this.transform.position;
+                        agent.destination = navTarget;
                     }
                 }
             }
@@ -108,19 +116,25 @@ public class citizenScript : MonoBehaviour {
 
 
     void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "vendor")
+    {       
+        if(other.tag == "diningSpot")
         {
-            vendorProx = true;
+            if (!dineCollide && getDining) //make sure they want to get some food and haven't already touched collider
+            {
+                hunger += 40;
+                currentBldg.GetComponent<BuildingScript>().diningLocations.Add(navTarget);
+                navTarget = this.transform.position;
+                getDining = false;
+                Debug.Log("wut");
+                dineCollide = true;
+            }
+ 
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.tag == "vendor")
-        {
-            vendorProx = false;
-        }
+
     }
     // on trigger enter
 }

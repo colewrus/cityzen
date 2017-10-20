@@ -11,6 +11,7 @@ public class BuildingScript : MonoBehaviour {
     public List<GameObject> foodList = new List<GameObject>();
     public GameObject vendor; //player and/or cityzen. Gonna need a way to scale up for multiple vendors
 
+    public List<Vector3> diningLocations = new List<Vector3>();
 
     void Awake()
     {
