@@ -19,48 +19,66 @@ public class citizenScript : MonoBehaviour {
    
 
     //Hunger function variables
-    float hunger;
+    public float hunger;
     public GameObject currentBldg; //what building are you currently inside?
-    Vector3 navTarget; //navMesh target - vector3?
+    public Vector3 navTarget; //navMesh target - vector3?
     bool getDining; //do you need to grab a dining location?
     bool dineCollide; //did you hit the trigger for the dining box - prevents the capsule collider from having double contact with trigger
     bool leaveBool; //trigger to start the leave process. Might be obsolete
     GameObject foodObj; //used for consuming food, obj holds values 
-    
+    public NavMeshAgent agent;
 
-
-
+    //wander variable
+    public float wTimer; //wander timer
+    public float tempTimer;
+    public float yCorrection; //because it the wander point pulls a point from a sphere 
     public List<string> c_PhrasesPatron = new List<string>();
+    public bool bool_Wander;
 
 	// Use this for initialization
 	void Start () {
-        citizen = true;
-        navTarget = this.transform.position;
-        Debug.Log(navTarget);
+        agent = GetComponent<NavMeshAgent>();
+        citizen = true;    
         getDining = false;
-        hunger = 40;
-
         dineCollide = false;
+        float tempTimer = wTimer;
     }
 	
 	// Update is called once per frame
 	void Update () {
         Hunger();
-        
-		
-	}
+        agent.destination = navTarget;
+        transform.LookAt(navTarget);
+        if (tempTimer > 0){
+
+            tempTimer -= 1 * Time.deltaTime;
+        }else if(bool_Wander)
+        {
+            navTarget = new Vector3(0,0,3) + Random.insideUnitSphere * 15;
+            navTarget.y = yCorrection;
+            tempTimer = wTimer;
+        }
+        else
+        {
+            tempTimer = wTimer;
+        }
+    }
 
     private void OnMouseOver()
     {
-        
-        gameObject.GetComponent<Renderer>().material = highlight;
-
-        if (Input.GetMouseButtonUp(0))
+        var distance = Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, this.transform.position);
+        if(distance < 6)
         {
-            bnb_FPScontroller.instance.lockCursor = false;
-            textWindow.SetActive(true);
-            textWindow.transform.GetChild(0).GetComponent<Text>().text = c_PhrasesPatron[0];
+            gameObject.GetComponent<Renderer>().material = highlight;
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                bnb_FPScontroller.instance.lockCursor = false;
+                textWindow.SetActive(true);
+                textWindow.transform.GetChild(0).GetComponent<Text>().text = c_PhrasesPatron[0];
+            }
         }
+
     }
 
     private void OnMouseExit()
@@ -81,33 +99,25 @@ public class citizenScript : MonoBehaviour {
         hunger -= 0.1f * Time.deltaTime;
         if (hunger <= 40)
         {
-            
-            if(currentBldg != null)
+            bool_Wander = false;
+            if (currentBldg.GetComponent<BuildingScript>().food_Vend)
             {
-                if (currentBldg.GetComponent<BuildingScript>().food_Vend)
+                if (currentBldg.GetComponent<BuildingScript>().diningLocations.Count > 0)
                 {
-                    if (currentBldg.GetComponent<BuildingScript>().diningLocations.Count > 0)
+                    if(!getDining)
                     {
-                        if(!getDining)
-                        {
-                            navTarget = currentBldg.GetComponent<BuildingScript>().diningLocations[0];
-                            currentBldg.GetComponent<BuildingScript>().diningLocations.Remove(navTarget);
-                            getDining = true;
-                        }
-                        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-                        
-                        
-                        agent.destination = navTarget;
-                    }
-                    else
-                    {
-                        getDining = false;
-                        navTarget = this.transform.position;
-                        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-                        agent.destination = navTarget;
-                    }
+                        navTarget = currentBldg.GetComponent<BuildingScript>().diningLocations[0];
+                        navTarget.y = yCorrection;
+                        currentBldg.GetComponent<BuildingScript>().diningLocations.Remove(navTarget);
+                        getDining = true;
+                    }                                          
                 }
-            }
+                else
+                {
+                    getDining = false;                    
+                    navTarget = gameObject.transform.localPosition;                                       
+                }
+            }            
         }else
         {
             return;
@@ -123,12 +133,12 @@ public class citizenScript : MonoBehaviour {
             {
                 hunger += 40;
                 currentBldg.GetComponent<BuildingScript>().diningLocations.Add(navTarget);
-                navTarget = this.transform.position;
+                navTarget = gameObject.transform.localPosition;
                 getDining = false;
                 Debug.Log("wut");
                 dineCollide = true;
-            }
- 
+                bool_Wander = true;
+            } 
         }
     }
 

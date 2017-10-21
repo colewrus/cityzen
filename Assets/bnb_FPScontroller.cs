@@ -113,15 +113,11 @@ public class bnb_FPScontroller : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "vendor")
-        {
-            BuildingScript.instance.vendor = this.gameObject;
-        }
+       
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "vendor")
-            BuildingScript.instance.vendor = null;
+     
     }
 }
