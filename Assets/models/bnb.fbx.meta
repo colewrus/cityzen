@@ -1,0 +1,183 @@
+fileFormatVersion: 2
+guid: a0f91a547ea8cf442b728f6f66d417c9
+timeCreated: 1508599801
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: 1.Back
+    100002: 1.front
+    100004: 1.front.001
+    100006: 1.left
+    100008: 1.Right
+    100010: 1st.room
+    100012: 2.Back
+    100014: 2.Front
+    100016: 2.Left
+    100018: 2.right
+    100020: 2nd.rooms
+    100022: 3.back
+    100024: 3.front
+    100026: 3.left
+    100028: 3.Right
+    100030: //RootNode
+    100032: Camera
+    100034: Floors
+    100036: Lamp
+    100038: stairs
+    400000: 1.Back
+    400002: 1.front
+    400004: 1.front.001
+    400006: 1.left
+    400008: 1.Right
+    400010: 1st.room
+    400012: 2.Back
+    400014: 2.Front
+    400016: 2.Left
+    400018: 2.right
+    400020: 2nd.rooms
+    400022: 3.back
+    400024: 3.front
+    400026: 3.left
+    400028: 3.Right
+    400030: //RootNode
+    400032: Camera
+    400034: Floors
+    400036: Lamp
+    400038: stairs
+    2000000: Camera
+    2300000: 1.Back
+    2300002: 1.front
+    2300004: 1.front.001
+    2300006: 1.left
+    2300008: 1.Right
+    2300010: 1st.room
+    2300012: 2.Back
+    2300014: 2.Front
+    2300016: 2.Left
+    2300018: 2.right
+    2300020: 2nd.rooms
+    2300022: 3.back
+    2300024: 3.front
+    2300026: 3.left
+    2300028: 3.Right
+    2300030: Floors
+    2300032: stairs
+    3300000: 1.Back
+    3300002: 1.front
+    3300004: 1.front.001
+    3300006: 1.left
+    3300008: 1.Right
+    3300010: 1st.room
+    3300012: 2.Back
+    3300014: 2.Front
+    3300016: 2.Left
+    3300018: 2.right
+    3300020: 2nd.rooms
+    3300022: 3.back
+    3300024: 3.front
+    3300026: 3.left
+    3300028: 3.Right
+    3300030: Floors
+    3300032: stairs
+    4300000: 1.front
+    4300002: 3.front
+    4300004: 3.left
+    4300006: 3.back
+    4300008: 3.Right
+    4300010: 2.right
+    4300012: 2.Back
+    4300014: 2.Left
+    4300016: 2.Front
+    4300018: 1.left
+    4300020: 1.Back
+    4300022: 1.Right
+    4300024: 1st.room
+    4300026: 2nd.rooms
+    4300028: stairs
+    4300030: 1.front.001
+    4300032: Floors
+    10800000: Lamp
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 95ce10f212d7682408afc6dede7e8cde, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
