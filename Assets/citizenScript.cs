@@ -15,7 +15,8 @@ public class citizenScript : MonoBehaviour {
     public GameObject textWindow;
 
 
-   
+    //general vars
+    public float contactDistance; //how far can you be from the citzen for you to interact?
    
 
     //Hunger function variables
@@ -42,6 +43,7 @@ public class citizenScript : MonoBehaviour {
         getDining = false;
         dineCollide = false;
         float tempTimer = wTimer;
+        bool_Wander = false;
     }
 	
 	// Update is called once per frame
@@ -49,13 +51,20 @@ public class citizenScript : MonoBehaviour {
         Hunger();
         agent.destination = navTarget;
         transform.LookAt(navTarget);
-        if (tempTimer > 0){
+        Wander();
+    }
+
+    void Wander()
+    {
+        if (tempTimer > 0)
+        {
 
             tempTimer -= 1 * Time.deltaTime;
-        }else if(bool_Wander)
+        }
+        else if (bool_Wander)
         {
-            navTarget = new Vector3(0,0,3) + Random.insideUnitSphere * 15;
-            navTarget.y = yCorrection;
+            navTarget = new Vector3(0, 0, 3) + Random.insideUnitSphere * 18;
+            navTarget.y = gameObject.transform.position.y;
             tempTimer = wTimer;
         }
         else
@@ -67,7 +76,7 @@ public class citizenScript : MonoBehaviour {
     private void OnMouseOver()
     {
         var distance = Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, this.transform.position);
-        if(distance < 6)
+        if(distance < contactDistance)
         {
             gameObject.GetComponent<Renderer>().material = highlight;
 
@@ -78,7 +87,6 @@ public class citizenScript : MonoBehaviour {
                 textWindow.transform.GetChild(0).GetComponent<Text>().text = c_PhrasesPatron[0];
             }
         }
-
     }
 
     private void OnMouseExit()
@@ -107,7 +115,7 @@ public class citizenScript : MonoBehaviour {
                     if(!getDining)
                     {
                         navTarget = currentBldg.GetComponent<BuildingScript>().diningLocations[0];
-                        navTarget.y = yCorrection;
+                        navTarget.y = gameObject.transform.position.y;
                         currentBldg.GetComponent<BuildingScript>().diningLocations.Remove(navTarget);
                         getDining = true;
                     }                                          
@@ -140,13 +148,22 @@ public class citizenScript : MonoBehaviour {
                 bool_Wander = true;
             } 
         }
+
+        //collide with the check in 
+            //show that check in is occupied, set a spot in the waiting room (sphere near the desk)
+        if(other.gameObject.name == "check_In")
+        {
+            bool_Wander = true;
+            tempTimer = 0;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
 
     }
-    // on trigger enter
+
+    
 }
 
 

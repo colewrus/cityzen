@@ -21,18 +21,22 @@ public class BuildingScript : MonoBehaviour {
 
     public List<Vector3> diningLocations = new List<Vector3>();
 
+    public float clock; 
+
     void Awake()
     {
         if (instance == null)
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
+        
     }
 
     // Use this for initialization
     void Start () {
         tempZen = null;
-	}
+        clock = 0;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -40,8 +44,17 @@ public class BuildingScript : MonoBehaviour {
         {
             AddCityzen();
         }
+        Hours();
 	}
 
+    void Hours(){
+        clock += 3 * Time.deltaTime;
+        if(clock >= 14)
+        {
+            Debug.Log("day end");
+            clock = 0;
+        }
+    }
 
     public void AddCityzen()
     {
@@ -50,6 +63,6 @@ public class BuildingScript : MonoBehaviour {
         tempZen.GetComponent<citizenScript>().hunger = 100;
         tempZen.GetComponent<citizenScript>().navTarget = GameObject.FindGameObjectWithTag("buildingController").transform.GetChild(0).transform.position;
         tempZen.GetComponent<citizenScript>().textWindow = textBox;       
-        //set empty gameObject to instance of cityzen prefab
+       
     }
 }
