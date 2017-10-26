@@ -222,6 +222,7 @@
     <Compile Include="Assets\bnb_FPScontroller.cs" />
     <Compile Include="Assets\BuildingScript.cs" />
     <Compile Include="Assets\citizenScript.cs" />
+    <Compile Include="Assets\GM.cs" />
     <Compile Include="Assets\newversionprefabs\SensorScript\CivicSupportScript.cs" />
     <Compile Include="Assets\newversionprefabs\SensorScript\CommunityScript.cs" />
     <Compile Include="Assets\newversionprefabs\SensorScript\EconOppSensor.cs" />

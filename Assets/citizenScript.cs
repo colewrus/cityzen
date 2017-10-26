@@ -6,6 +6,12 @@ using UnityEngine.AI;
 
 public class citizenScript : MonoBehaviour {
 
+    //unique identifier
+    public float ZEN_ID;
+
+    //room?
+    
+
     public bool patron;
     public bool vendor;
     public bool citizen;
@@ -17,17 +23,26 @@ public class citizenScript : MonoBehaviour {
 
     //general vars
     public float contactDistance; //how far can you be from the citzen for you to interact?
-   
+    public GameObject currentBldg; //what building are you currently inside?
+    public GameObject home; //permanent home, set some despawn point on map edge if homeless for now
+    public bool inside;
+    public Vector3 navTarget; //navMesh target - vector3?
+
+    //Customer variables
+    public bool lf_Hotel; //looking for hotel
 
     //Hunger function variables
-    public float hunger;
-    public GameObject currentBldg; //what building are you currently inside?
-    public Vector3 navTarget; //navMesh target - vector3?
+    public float hunger;    
+    
     bool getDining; //do you need to grab a dining location?
     bool dineCollide; //did you hit the trigger for the dining box - prevents the capsule collider from having double contact with trigger
     bool leaveBool; //trigger to start the leave process. Might be obsolete
     GameObject foodObj; //used for consuming food, obj holds values 
     public NavMeshAgent agent;
+
+    //exit variable
+    public bool check_Exit; //do you have pending exit command? should you be heading to exit
+
 
     //wander variable
     public float wTimer; //wander timer
@@ -35,6 +50,8 @@ public class citizenScript : MonoBehaviour {
     public float yCorrection; //because it the wander point pulls a point from a sphere 
     public List<string> c_PhrasesPatron = new List<string>();
     public bool bool_Wander;
+
+ 
 
 	// Use this for initialization
 	void Start () {
@@ -44,6 +61,7 @@ public class citizenScript : MonoBehaviour {
         dineCollide = false;
         float tempTimer = wTimer;
         bool_Wander = false;
+        ZEN_ID = GM.instance.MASTER_Occupants.Count; 
     }
 	
 	// Update is called once per frame
@@ -153,8 +171,28 @@ public class citizenScript : MonoBehaviour {
             //show that check in is occupied, set a spot in the waiting room (sphere near the desk)
         if(other.gameObject.name == "check_In")
         {
-            bool_Wander = true;
-            tempTimer = 0;
+            CheckIn_Hotel();
+        }
+
+        if(other.gameObject.tag == "exit")
+        {
+            if (check_Exit)
+            {
+                currentBldg = null;
+                if (home != null)
+                {
+                    gameObject.SetActive(false);
+                }
+                else
+                {
+                    gameObject.SetActive(false);
+                    //need some way to throw them back into the pool of prefabs to spawn (oh hey, object pooling). 
+                    //Maybe creation process can just randomly roll attributes, initial load of game can instantiate then deactivate a pool of characters.
+                    //Pool scales as the town grows
+                }
+                check_Exit = false;
+                bool_Wander = false;                
+            }
         }
     }
 
@@ -163,7 +201,73 @@ public class citizenScript : MonoBehaviour {
 
     }
 
-    
+    void CheckIn_Hotel()
+    {
+        if (lf_Hotel)
+        {
+            for (int i = 0; i < currentBldg.GetComponent<BuildingScript>().guestRooms.Count; i++)
+            {
+                if (!currentBldg.GetComponent<BuildingScript>().guestRooms[i].occupied)
+                {
+                    if (GM.instance.clock > 120)
+                    {
+                        bool_Wander = true;
+                        tempTimer = 0;
+                    }
+                    else   //go into town
+                    {
+                        navTarget = currentBldg.transform.GetChild(1).transform.position;
+                        check_Exit = true;
+                        bool_Wander = false;
+                        
+                    }
+
+                    lf_Hotel = false; //no longer looking for hotel
+                    currentBldg.GetComponent<BuildingScript>().guestRooms[i].guestObj = this.gameObject;
+                    home = currentBldg;
+                    currentBldg.GetComponent<BuildingScript>().guestRooms[i].occupied = true; //make the hotel room occupied
+                    break; //get out of the loop 
+                }
+                else  //no rooms available. Leave some sort of feedback so the player knows who they missed. 
+                {
+                    navTarget = currentBldg.transform.GetChild(1).transform.position;
+                    check_Exit = true;
+                }
+            }
+        }
+    }
+
+    public void GoHome()
+    {
+        if(GM.instance.currentPerspective == GM.Perspective.indoors)
+        {
+            if (currentBldg == null)
+            {
+                check_Exit = false;
+                gameObject.SetActive(true);
+                currentBldg = home;
+                gameObject.transform.position = currentBldg.transform.GetChild(1).transform.position;
+                bool_Wander = false;
+
+                //do Zens spend time just chilling in home areas? What sets their behavior at home?
+                //Start with just time of day, maybe a morning > day > evening > sleep cycle
+                //gonna need to check if they are a guest or homeowner
+                for(int i=0; i< currentBldg.GetComponent<BuildingScript>().guestRooms.Count; i++)
+                {
+                    GameObject clone = currentBldg.GetComponent<BuildingScript>().guestRooms[i].guestObj;
+                    if(clone.GetComponent<citizenScript>().ZEN_ID == ZEN_ID)
+                    {
+                        Debug.Log(currentBldg.GetComponent<BuildingScript>().guestRooms[i].room_Location);
+                        navTarget = currentBldg.GetComponent<BuildingScript>().guestRooms[i].room_Location;
+                    }
+                }
+                //need to compare this game object identifier with the unique identifiers in the                
+            }
+        }
+        //navTarget = home;
+        //if Zen is outside send to the building of the room
+        //if inside, send up to room location
+    }
 }
 
 
