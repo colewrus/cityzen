@@ -1,6 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+[System.Serializable]
+public class QuestItem {
+    public GameObject questItem;
+    public bool collectible; //does it disappear
+    public bool q_Note;
+    public string q_Note_text;
+
+
+}
+
+[System.Serializable]
+public class Quest
+{
+    public QuestItem item;
+    public int ID;    
+    public string questText;
+    //tracking
+    public bool objCollected; //is it in your inventory/have you visited the obj?
+}
 
 public class GM : MonoBehaviour {
 
@@ -9,6 +30,11 @@ public class GM : MonoBehaviour {
     public static GM instance = null;
 
     public List<GameObject> MASTER_Occupants = new List<GameObject>();
+
+    //Quest vars
+    [SerializeField]
+    public List<Quest> zenQuests = new List<Quest>();
+
 
     //Time variables - Day/Night cycle
     public float clock;

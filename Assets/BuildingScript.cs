@@ -78,8 +78,9 @@ public class BuildingScript : MonoBehaviour {
         GM.instance.MASTER_Occupants.Add(tempZen);
         tempZen.GetComponent<citizenScript>().hunger = 100;
         tempZen.GetComponent<citizenScript>().navTarget = GameObject.FindGameObjectWithTag("buildingController").transform.GetChild(0).transform.position;
+        tempZen.GetComponent<citizenScript>().navTarget.y = tempZen.transform.position.y;
         tempZen.GetComponent<citizenScript>().textWindow = textBox;
-        tempZen.GetComponent<citizenScript>().lf_Hotel = true;
+        //tempZen.GetComponent<citizenScript>().lf_Hotel = true;
        
     }
 }

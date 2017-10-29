@@ -223,6 +223,7 @@
     <Compile Include="Assets\BuildingScript.cs" />
     <Compile Include="Assets\citizenScript.cs" />
     <Compile Include="Assets\GM.cs" />
+    <Compile Include="Assets\interaction.cs" />
     <Compile Include="Assets\newversionprefabs\SensorScript\CivicSupportScript.cs" />
     <Compile Include="Assets\newversionprefabs\SensorScript\CommunityScript.cs" />
     <Compile Include="Assets\newversionprefabs\SensorScript\EconOppSensor.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Assets\scripts\gridScript.cs" />
     <Compile Include="Assets\scripts\tileMouseScript.cs" />
     <Compile Include="Assets\scripts\uiEvents.cs" />
+    <Compile Include="Assets\test.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\LICENSE.txt" />

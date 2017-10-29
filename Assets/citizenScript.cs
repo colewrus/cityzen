@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 
+
+
+
 public class citizenScript : MonoBehaviour {
 
     //unique identifier
@@ -27,9 +30,18 @@ public class citizenScript : MonoBehaviour {
     public GameObject home; //permanent home, set some despawn point on map edge if homeless for now
     public bool inside;
     public Vector3 navTarget; //navMesh target - vector3?
+    public Transform walkingSphere;
+
+    //quest var
+    public GameObject questTextPanel;
+    public bool questGiver;
+    
 
     //Customer variables
     public bool lf_Hotel; //looking for hotel
+
+    //Chat vars
+    public List<GameObject> chatZenList = new List<GameObject>();
 
     //Hunger function variables
     public float hunger;    
@@ -61,15 +73,24 @@ public class citizenScript : MonoBehaviour {
         dineCollide = false;
         float tempTimer = wTimer;
         bool_Wander = false;
-        ZEN_ID = GM.instance.MASTER_Occupants.Count; 
+        ZEN_ID = GM.instance.MASTER_Occupants.Count;
+        agent.destination = navTarget;
+        Debug.Log(agent.destination + " !: " + navTarget);
+        walkingSphere = GameObject.FindGameObjectWithTag("walkSphere").transform;
+
+        //quest init
+        questTextPanel.SetActive(false);
     }
 	
 	// Update is called once per frame
 	void Update () {
-        Hunger();
+        //Hunger();
         agent.destination = navTarget;
-        transform.LookAt(navTarget);
+       if(agent.destination != navTarget)
+            transform.LookAt(new Vector3(navTarget.x, gameObject.transform.position.y, navTarget.z));
         Wander();
+
+
     }
 
     void Wander()
@@ -81,7 +102,12 @@ public class citizenScript : MonoBehaviour {
         }
         else if (bool_Wander)
         {
-            navTarget = new Vector3(0, 0, 3) + Random.insideUnitSphere * 18;
+            navTarget = walkingSphere.position + Random.insideUnitSphere * walkingSphere.GetComponent<SphereCollider>().radius;
+            Vector3 navCheck = navTarget + transform.position;
+            Debug.Log(navCheck);
+            NavMeshHit hit;
+            NavMesh.SamplePosition(navCheck, out hit, walkingSphere.GetComponent<SphereCollider>().radius, 1);
+            Debug.Log(hit.position);
             navTarget.y = gameObject.transform.position.y;
             tempTimer = wTimer;
         }
@@ -100,9 +126,20 @@ public class citizenScript : MonoBehaviour {
 
             if (Input.GetMouseButtonUp(0))
             {
-                bnb_FPScontroller.instance.lockCursor = false;
-                textWindow.SetActive(true);
-                textWindow.transform.GetChild(0).GetComponent<Text>().text = c_PhrasesPatron[0];
+                
+                if (questGiver)
+                {
+                    bnb_FPScontroller.instance.lockCursor = false;
+                    questTextPanel.SetActive(true);
+                    bnb_FPScontroller.instance.myQuests.Add(GM.instance.zenQuests[0]);
+
+                }else if (!questGiver)
+                {
+                    bnb_FPScontroller.instance.lockCursor = false;
+                    textWindow.SetActive(true);
+                    textWindow.transform.GetChild(0).GetComponent<Text>().text = c_PhrasesPatron[0];
+                }
+
             }
         }
     }
@@ -114,7 +151,13 @@ public class citizenScript : MonoBehaviour {
 
     public void CloseText()
     {
-        textWindow.SetActive(false);
+        if (textWindow.active)
+        {
+            textWindow.SetActive(false);
+        }else if (questTextPanel.active)
+        {
+            questTextPanel.SetActive(false);
+        }        
         bnb_FPScontroller.instance.lockCursor = true;
     }
 
@@ -133,7 +176,7 @@ public class citizenScript : MonoBehaviour {
                     if(!getDining)
                     {
                         navTarget = currentBldg.GetComponent<BuildingScript>().diningLocations[0];
-                        navTarget.y = gameObject.transform.position.y;
+                        //navTarget.y = gameObject.transform.position.y;
                         currentBldg.GetComponent<BuildingScript>().diningLocations.Remove(navTarget);
                         getDining = true;
                     }                                          
@@ -194,11 +237,19 @@ public class citizenScript : MonoBehaviour {
                 bool_Wander = false;                
             }
         }
+
+        if(other.gameObject.tag == "zen")
+        {
+            chatZenList.Add(other.gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-
+        if (other.gameObject.tag == "zen")
+        {
+            chatZenList.Remove(other.gameObject);
+        }
     }
 
     void CheckIn_Hotel()
@@ -217,9 +268,9 @@ public class citizenScript : MonoBehaviour {
                     else   //go into town
                     {
                         navTarget = currentBldg.transform.GetChild(1).transform.position;
+                        //navTarget.y = this.transform.position.y;
                         check_Exit = true;
-                        bool_Wander = false;
-                        
+                        bool_Wander = false;                        
                     }
 
                     lf_Hotel = false; //no longer looking for hotel
@@ -231,6 +282,8 @@ public class citizenScript : MonoBehaviour {
                 else  //no rooms available. Leave some sort of feedback so the player knows who they missed. 
                 {
                     navTarget = currentBldg.transform.GetChild(1).transform.position;
+                    //navTarget.y = this.transform.position.y;
+
                     check_Exit = true;
                 }
             }
@@ -267,6 +320,12 @@ public class citizenScript : MonoBehaviour {
         //navTarget = home;
         //if Zen is outside send to the building of the room
         //if inside, send up to room location
+    }
+
+
+    public void Chat()
+    {
+
     }
 }
 

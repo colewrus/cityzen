@@ -11,6 +11,14 @@ public class bnb_FPScontroller : MonoBehaviour {
     float mouseY;
     Vector3 mousePos;
 
+    //UI elements
+    public GameObject textWindow;
+    public GameObject questTextPanel;
+
+
+    public List<Quest> myQuests = new List<Quest>();
+    public GameObject zenTalk; //zen you are talking to right now
+
     //cursor lock
     public bool lockCursor;
     bool cursorIsLocked;
@@ -56,7 +64,20 @@ public class bnb_FPScontroller : MonoBehaviour {
         PlayerWASD();
 	}
 
-   
+
+
+    public void CloseText()
+    {
+        if (textWindow.active)
+        {
+            textWindow.SetActive(false);
+        }
+        else if (questTextPanel.active)
+        {
+            questTextPanel.SetActive(false);            
+        }
+        lockCursor = true;
+    }
 
 
     public void PlayerWASD()
