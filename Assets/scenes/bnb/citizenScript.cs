@@ -10,7 +10,7 @@ using UnityEngine.AI;
 public class citizenScript : MonoBehaviour {
 
     //unique identifier
-    public float ZEN_ID;
+    public int ZEN_ID;
 
     //room?
     
@@ -35,7 +35,8 @@ public class citizenScript : MonoBehaviour {
     //quest var
     public GameObject questTextPanel;
     public bool questGiver;
-    
+    public bool questTurnIn; //are you waiting for a player to turn in an active quest. We need a much better system.....
+    Quest tempQuest;
 
     //Customer variables
     public bool lf_Hotel; //looking for hotel
@@ -80,6 +81,7 @@ public class citizenScript : MonoBehaviour {
 
         //quest init
         questTextPanel.SetActive(false);
+        questTurnIn = false;
     }
 	
 	// Update is called once per frame
@@ -126,12 +128,33 @@ public class citizenScript : MonoBehaviour {
 
             if (Input.GetMouseButtonUp(0))
             {
-                
+                bnb_FPScontroller.instance.lockCursor = false;
                 if (questGiver)
                 {
-                    bnb_FPScontroller.instance.lockCursor = false;
-                    questTextPanel.SetActive(true);
-                    bnb_FPScontroller.instance.myQuests.Add(GM.instance.zenQuests[0]);
+                    //bnb_FPScontroller.instance.lockCursor = false;
+                                    
+                    if (!questTurnIn)
+                    {
+                        questTextPanel.SetActive(true);
+
+                        bnb_FPScontroller.instance.myQuests.Add(new Quest("test", ZEN_ID, 0));
+                       // bnb_FPScontroller.instance.myQuests.Add(GM.instance.zenQuests[0]);
+                        bnb_FPScontroller.instance.myQuests[bnb_FPScontroller.instance.myQuests.Count - 1].ID = ZEN_ID;
+                        questTurnIn = true;
+                    }
+                    else if(questTurnIn)
+                    {
+                        
+                        for (int i = 0; i < bnb_FPScontroller.instance.myQuests.Count; i++)
+                        {
+                            if (bnb_FPScontroller.instance.myQuests[i].ID == ZEN_ID && bnb_FPScontroller.instance.myQuests[i].objCollected)
+                            {
+                                Debug.Log("you did the thing!");
+                                questTurnIn = false;
+                            }
+                        }
+                    }
+                      
 
                 }else if (!questGiver)
                 {

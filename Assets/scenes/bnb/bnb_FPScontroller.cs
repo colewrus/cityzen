@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class bnb_FPScontroller : MonoBehaviour {
 
@@ -26,15 +27,17 @@ public class bnb_FPScontroller : MonoBehaviour {
     private Quaternion CharacterRot;
     private Quaternion CameraRot;
 
+    //movement vars
     public float playerSpeed;
-
+    NavMeshAgent agent;
 
     void Awake()
     {
         if (instance == null)
             instance = this;
         else if (instance != this)
-            Destroy(gameObject);    
+            // Destroy(gameObject);    
+            Debug.Log("wut");
     }
 
     // Use this for initialization
@@ -42,6 +45,7 @@ public class bnb_FPScontroller : MonoBehaviour {
         CharacterRot = transform.localRotation;
         CameraRot = playerCam.transform.localRotation;
         cursorIsLocked = true;
+        agent = GetComponent<NavMeshAgent>();
 	}
 
     // Update is called once per frame
@@ -62,9 +66,16 @@ public class bnb_FPScontroller : MonoBehaviour {
 
         UpdateCursorLock();
         PlayerWASD();
+        //NavMovement();
 	}
 
+    public void NavMovement()
+    {
+        float horiz = Input.GetAxis("Horizontal");
+        float vert = Input.GetAxis("Vertical");
+        agent.destination = transform.position + (transform.forward * vert + transform.right * horiz);
 
+    }
 
     public void CloseText()
     {
@@ -85,10 +96,8 @@ public class bnb_FPScontroller : MonoBehaviour {
         float horiz = Input.GetAxis("Horizontal");
         float vert = Input.GetAxis("Vertical");
 
-        Vector3 desiredMove = transform.forward * vert + transform.right * horiz + (transform.up*-1);
-
+        Vector3 desiredMove = transform.forward * vert + transform.right * horiz + (transform.up*-1); 
         gameObject.GetComponent<Rigidbody>().velocity = desiredMove * playerSpeed;
-
     }
 
     public void UpdateCursorLock()

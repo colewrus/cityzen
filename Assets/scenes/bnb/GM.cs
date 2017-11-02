@@ -16,11 +16,22 @@ public class QuestItem {
 [System.Serializable]
 public class Quest
 {
+    public string name;
     public QuestItem item;
     public int ID;    
     public string questText;
     //tracking
     public bool objCollected; //is it in your inventory/have you visited the obj?
+
+    public Quest(string N, int Identify, int Pos) //Pos indicates the point in the GM quest list so you can pull those public assets
+    {
+        name = N;        
+        ID = Identify;
+        item = GM.instance.zenQuests[Pos].item;
+        questText = GM.instance.zenQuests[Pos].questText;
+        objCollected = false;
+    }
+
 }
 
 public class GM : MonoBehaviour {

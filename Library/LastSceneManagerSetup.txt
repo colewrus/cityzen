@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/scenes/bnb.unity
+- path: Assets/scenes/bnb/bnb.unity
   isLoaded: 1
   isActive: 1
