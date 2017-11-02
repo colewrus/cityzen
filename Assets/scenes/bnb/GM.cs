@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class QuestItem {
@@ -34,6 +35,16 @@ public class Quest
 
 }
 
+
+[System.Serializable]
+public class WorldBuildings
+{
+    public string name;
+    public GameObject building;
+    public Transform doorway;
+    public Vector3 playerSpawnPoint;
+}
+
 public class GM : MonoBehaviour {
 
     public enum Perspective    {  indoors, outside, map}
@@ -41,6 +52,10 @@ public class GM : MonoBehaviour {
     public static GM instance = null;
 
     public List<GameObject> MASTER_Occupants = new List<GameObject>();
+
+    //world scene vars
+    public List<WorldBuildings> BuildingList = new List<WorldBuildings>();
+    public string lastBuilding; //what building did you just leave?
 
     //Quest vars
     [SerializeField]
@@ -61,13 +76,33 @@ public class GM : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     // Use this for initialization
     void Start () {
         check_GoHome = false;
 	}
-	
+   
+    public void PlayerExit()
+    {
+        for (int i = 0; i < BuildingList.Count - 1; i++)
+        {
+            if (BuildingList[i].name == lastBuilding)
+            {                
+                GameObject.FindGameObjectWithTag("Player").transform.position = BuildingList[i].doorway.position + transform.forward *2;
+            }
+            else if (lastBuilding == null)
+            {
+                break;
+            }
+        }
+    }
+
+
+
+    
+
 	// Update is called once per frame
 	void Update () {
         Hours();

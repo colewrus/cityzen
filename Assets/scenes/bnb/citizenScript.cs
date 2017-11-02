@@ -80,6 +80,7 @@ public class citizenScript : MonoBehaviour {
         walkingSphere = GameObject.FindGameObjectWithTag("walkSphere").transform;
 
         //quest init
+        questTextPanel = GameObject.Find("questPanel");
         questTextPanel.SetActive(false);
         questTurnIn = false;
     }

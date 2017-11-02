@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class bnb_FPScontroller : MonoBehaviour {
 
@@ -38,6 +39,7 @@ public class bnb_FPScontroller : MonoBehaviour {
         else if (instance != this)
             // Destroy(gameObject);    
             Debug.Log("wut");
+        DontDestroyOnLoad(gameObject);
     }
 
     // Use this for initialization
@@ -143,11 +145,30 @@ public class bnb_FPScontroller : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-       
+        if (other.transform.tag == "exit")
+        {
+            GM.instance.lastBuilding = other.transform.parent.GetComponent<BuildingScript>().name;
+            GM.instance.PlayerExit();
+
+        }
+
+       if(other.transform.tag == "entrance")
+        {
+            //you are loading from the world here, load the relevant building and then there's gonna be an indoor generator
+            //run from the GM script
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if(other.tag == "buildingController")
+        {
+            for(int i=0; i<other.gameObject.GetComponent<BuildingScript>().occupants.Count; i++)
+            {
+                other.gameObject.GetComponent<BuildingScript>().occupants[i].SetActive(false);
+            }
+           
+        }
      
     }
 }

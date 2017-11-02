@@ -21,6 +21,9 @@ public class BuildingScript : MonoBehaviour {
 
     public static BuildingScript instance = null;
 
+    public string name;
+
+
     //Vendor variables 
     public bool food_Vend; //is this a food vendor?
     public List<GameObject> foodList = new List<GameObject>();
