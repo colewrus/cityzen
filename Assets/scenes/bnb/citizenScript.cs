@@ -80,8 +80,6 @@ public class citizenScript : MonoBehaviour {
         walkingSphere = GameObject.FindGameObjectWithTag("walkSphere").transform;
 
         //quest init
-        questTextPanel = GameObject.Find("questPanel");
-        questTextPanel.SetActive(false);
         questTurnIn = false;
     }
 	
@@ -136,8 +134,8 @@ public class citizenScript : MonoBehaviour {
                                     
                     if (!questTurnIn)
                     {
-                        questTextPanel.SetActive(true);
-
+                        bnb_FPScontroller.instance.questTextPanel.SetActive(true);
+                        
                         bnb_FPScontroller.instance.myQuests.Add(new Quest("test", ZEN_ID, 0));
                        // bnb_FPScontroller.instance.myQuests.Add(GM.instance.zenQuests[0]);
                         bnb_FPScontroller.instance.myQuests[bnb_FPScontroller.instance.myQuests.Count - 1].ID = ZEN_ID;

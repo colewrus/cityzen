@@ -5,9 +5,22 @@ using UnityEngine;
 public class interaction : MonoBehaviour {
 
 
+    /// <summary>
+    /// Make an enum script to choose what item this is, set the editor to only show certain options
+    /// </summary>
+
+
+        // Quest Vars
     public Quest tempQuest;
     public Material highlight;
     public Material default_Mat;
+
+    //node vars
+    public Material node_highlight;
+    public Material node_default;
+
+
+
 	// Use this for initialization
 	void Start () {
 		
@@ -20,10 +33,28 @@ public class interaction : MonoBehaviour {
 
     private void OnMouseOver()
     {
+        var distance = Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, this.transform.position);
+        if (distance <= 15)
+        {
+            if (gameObject.tag == "questObj")
+            {
+                QuestItem();
+            }
+
+            if (gameObject.tag == "node")
+            {
+                NodeF();
+            }
+        }
+        
+    }
+
+    void QuestItem()
+    {
         gameObject.GetComponent<Renderer>().material = highlight;
         if (Input.GetMouseButtonDown(0))
-        {           
-            for(int i=0; i<bnb_FPScontroller.instance.myQuests.Count; i++)
+        {
+            for (int i = 0; i < bnb_FPScontroller.instance.myQuests.Count; i++)
             {
                 tempQuest = bnb_FPScontroller.instance.myQuests[i];
 
@@ -37,8 +68,29 @@ public class interaction : MonoBehaviour {
         }
     }
 
+
+    void NodeF()
+    {
+        gameObject.GetComponent<Renderer>().material = node_highlight;
+        if (Input.GetMouseButtonUp(0))
+        {
+            Debug.Log("node clicked");
+            bnb_FPScontroller.instance.nodeModal.SetActive(true);
+            bnb_FPScontroller.instance.lockCursor = false;
+        }
+    }
+
     private void OnMouseExit()
     {
-        gameObject.GetComponent<Renderer>().material = default_Mat;
+        if(gameObject.tag == "questObj")
+        {
+            gameObject.GetComponent<Renderer>().material = default_Mat;
+           
+        }
+        if(gameObject.tag == "node")
+        {
+            gameObject.GetComponent<Renderer>().material = node_default;            
+        }
+        
     }
 }

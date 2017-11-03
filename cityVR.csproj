@@ -219,11 +219,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\bnb_FPScontroller.cs" />
-    <Compile Include="Assets\BuildingScript.cs" />
-    <Compile Include="Assets\citizenScript.cs" />
-    <Compile Include="Assets\GM.cs" />
-    <Compile Include="Assets\interaction.cs" />
     <Compile Include="Assets\newversionprefabs\SensorScript\CivicSupportScript.cs" />
     <Compile Include="Assets\newversionprefabs\SensorScript\CommunityScript.cs" />
     <Compile Include="Assets\newversionprefabs\SensorScript\EconOppSensor.cs" />
@@ -232,14 +227,19 @@
     <Compile Include="Assets\newversionprefabs\SensorScript\TriggerScript.cs" />
     <Compile Include="Assets\popTest\pop_Home.cs" />
     <Compile Include="Assets\popTest\popGM.cs" />
+    <Compile Include="Assets\scenes\bnb\bnb_FPScontroller.cs" />
+    <Compile Include="Assets\scenes\bnb\BuildingScript.cs" />
+    <Compile Include="Assets\scenes\bnb\citizenScript.cs" />
+    <Compile Include="Assets\scenes\bnb\GM.cs" />
+    <Compile Include="Assets\scenes\bnb\interaction.cs" />
+    <Compile Include="Assets\scenes\bnb\test.cs" />
     <Compile Include="Assets\scripts\building.cs" />
     <Compile Include="Assets\scripts\gridScript.cs" />
     <Compile Include="Assets\scripts\tileMouseScript.cs" />
     <Compile Include="Assets\scripts\uiEvents.cs" />
-    <Compile Include="Assets\test.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\LICENSE.txt" />
+    <None Include="Assets\scenes\bnb\LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

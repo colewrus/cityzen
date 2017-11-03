@@ -15,13 +15,14 @@ public class bnb_FPScontroller : MonoBehaviour {
 
     //UI elements
     public GameObject textWindow;
-    public GameObject questTextPanel;
-
+    public GameObject questTextPanel;  
+    public GameObject nodeModal;
 
     public List<Quest> myQuests = new List<Quest>();
-    public GameObject zenTalk; //zen you are talking to right now
+    GameObject zenTalk; //zen you are talking to right now
 
     //cursor lock
+    [HideInInspector]
     public bool lockCursor;
     bool cursorIsLocked;
 
@@ -88,6 +89,10 @@ public class bnb_FPScontroller : MonoBehaviour {
         else if (questTextPanel.active)
         {
             questTextPanel.SetActive(false);            
+        }
+        if (nodeModal.active)
+        {
+            nodeModal.SetActive(false);
         }
         lockCursor = true;
     }
