@@ -1,0 +1,287 @@
+fileFormatVersion: 2
+guid: 255eebc522ed909458aecc1f9d8877e3
+timeCreated: 1509900476
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: eyes.1
+    100002: eyes.2
+    100004: glasses
+    100006: m.body.1
+    100008: m.body.2
+    100010: m.body.3
+    100012: m.body.4
+    100014: m.head.1
+    100016: m.head.2
+    100018: m.head.3
+    100020: m.head.4
+    100022: //RootNode
+    100024: w.body.1
+    100026: w.body.1.LH
+    100028: w.body.1.LH.001
+    100030: w.body.1.LH.002
+    100032: w.body.1.LH.003
+    100034: w.body.1.LH.004
+    100036: w.body.1.LH.005
+    100038: w.body.1.LH.006
+    100040: w.body.1.LH.007
+    100042: w.body.1.RH
+    100044: w.body.1.RH.001
+    100046: w.body.1.RH.002
+    100048: w.body.1.RH.003
+    100050: w.body.1.RH.004
+    100052: w.body.1.RH.005
+    100054: w.body.1.RH.006
+    100056: w.body.1.RH.007
+    100058: w.body.2
+    100060: w.body.3
+    100062: w.body.4
+    100064: w.head.1
+    100066: w.head.2
+    100068: w.head.3
+    400000: eyes.1
+    400002: eyes.2
+    400004: glasses
+    400006: m.body.1
+    400008: m.body.2
+    400010: m.body.3
+    400012: m.body.4
+    400014: m.head.1
+    400016: m.head.2
+    400018: m.head.3
+    400020: m.head.4
+    400022: //RootNode
+    400024: w.body.1
+    400026: w.body.1.LH
+    400028: w.body.1.LH.001
+    400030: w.body.1.LH.002
+    400032: w.body.1.LH.003
+    400034: w.body.1.LH.004
+    400036: w.body.1.LH.005
+    400038: w.body.1.LH.006
+    400040: w.body.1.LH.007
+    400042: w.body.1.RH
+    400044: w.body.1.RH.001
+    400046: w.body.1.RH.002
+    400048: w.body.1.RH.003
+    400050: w.body.1.RH.004
+    400052: w.body.1.RH.005
+    400054: w.body.1.RH.006
+    400056: w.body.1.RH.007
+    400058: w.body.2
+    400060: w.body.3
+    400062: w.body.4
+    400064: w.head.1
+    400066: w.head.2
+    400068: w.head.3
+    2300000: eyes.1
+    2300002: eyes.2
+    2300004: glasses
+    2300006: m.body.1
+    2300008: m.body.2
+    2300010: m.body.3
+    2300012: m.body.4
+    2300014: m.head.1
+    2300016: m.head.2
+    2300018: m.head.3
+    2300020: m.head.4
+    2300022: w.body.1
+    2300024: w.body.1.LH
+    2300026: w.body.1.LH.001
+    2300028: w.body.1.LH.002
+    2300030: w.body.1.LH.003
+    2300032: w.body.1.LH.004
+    2300034: w.body.1.LH.005
+    2300036: w.body.1.LH.006
+    2300038: w.body.1.LH.007
+    2300040: w.body.1.RH
+    2300042: w.body.1.RH.001
+    2300044: w.body.1.RH.002
+    2300046: w.body.1.RH.003
+    2300048: w.body.1.RH.004
+    2300050: w.body.1.RH.005
+    2300052: w.body.1.RH.006
+    2300054: w.body.1.RH.007
+    2300056: w.body.2
+    2300058: w.body.3
+    2300060: w.body.4
+    2300062: w.head.1
+    2300064: w.head.2
+    2300066: w.head.3
+    3300000: eyes.1
+    3300002: eyes.2
+    3300004: glasses
+    3300006: m.body.1
+    3300008: m.body.2
+    3300010: m.body.3
+    3300012: m.body.4
+    3300014: m.head.1
+    3300016: m.head.2
+    3300018: m.head.3
+    3300020: m.head.4
+    3300022: w.body.1
+    3300024: w.body.1.LH
+    3300026: w.body.1.LH.001
+    3300028: w.body.1.LH.002
+    3300030: w.body.1.LH.003
+    3300032: w.body.1.LH.004
+    3300034: w.body.1.LH.005
+    3300036: w.body.1.LH.006
+    3300038: w.body.1.LH.007
+    3300040: w.body.1.RH
+    3300042: w.body.1.RH.001
+    3300044: w.body.1.RH.002
+    3300046: w.body.1.RH.003
+    3300048: w.body.1.RH.004
+    3300050: w.body.1.RH.005
+    3300052: w.body.1.RH.006
+    3300054: w.body.1.RH.007
+    3300056: w.body.2
+    3300058: w.body.3
+    3300060: w.body.4
+    3300062: w.head.1
+    3300064: w.head.2
+    3300066: w.head.3
+    4300000: glasses
+    4300002: w.body.1.LH.007
+    4300004: w.body.1.RH.007
+    4300006: w.body.1.LH.006
+    4300008: w.body.1.RH.006
+    4300010: w.body.1.LH.005
+    4300012: w.body.1.RH.005
+    4300014: w.body.1.LH.004
+    4300016: w.body.1.RH.004
+    4300018: m.head.3
+    4300020: w.head.3
+    4300022: m.body.3
+    4300024: m.head.2
+    4300026: m.body.2
+    4300028: w.body.1.RH.003
+    4300030: w.body.1.LH.003
+    4300032: w.body.1.RH.002
+    4300034: w.body.1.LH.002
+    4300036: w.body.1.RH.001
+    4300038: w.body.1.LH.001
+    4300040: m.body.1
+    4300042: m.head.1
+    4300044: w.body.4
+    4300046: w.body.3
+    4300048: w.body.2
+    4300050: w.head.2
+    4300052: eyes.1
+    4300054: eyes.2
+    4300056: w.body.1.RH
+    4300058: w.body.1.LH
+    4300060: w.body.1
+    4300062: w.head.1
+    4300064: m.head.4
+    4300066: m.body.4
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: b487160405a63ee47a65f8640547b5d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: f9cc8dc97d933494c88a3b4bc4a3a972, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 4733ce71028418e4d94288532ab8095f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: f79bdf3be7c6a6440b6a85e695f5ae4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 278b634f73059bf47a9cc3b29549df17, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: c7f6741a2ed7e5848ba19c836c1aa662, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
